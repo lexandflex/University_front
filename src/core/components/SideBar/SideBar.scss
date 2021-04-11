@@ -1,0 +1,54 @@
+.navigation {
+  position: fixed;
+  width: 60px;
+  height: 100%;
+  background: #140616;
+  transition: 0.5s;
+  overflow: hidden;
+  &:hover {
+    width: 250px;
+  }
+  ul {
+    position: absolute;
+    padding: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: #fff;
+    li {
+      position: relative;
+      width: 100%;
+      list-style: none;
+      a {
+        position: relative;
+        display: flex;
+        width: 100%;
+        text-decoration: none;
+        color: #fff;
+        .navigation-icon {
+          position: relative;
+          display: block;
+          min-width: 60px;
+          line-height: 60px;
+          height: 60px;
+          text-align: center;
+          .fa {
+            font-size: 24px;
+          }
+        }
+        .navigation-name {
+          position: relative;
+          display: block;
+          padding: 0 10px;
+          height: 60px;
+          line-height: 60px;
+          text-align: start;
+          white-space: nowrap;
+        }
+      }
+      &:hover {
+        background: #2ecc71;
+      }
+    }
+  }
+}
