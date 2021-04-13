@@ -6,6 +6,9 @@ export const AUTH_TYPES = {
   REGISTER: 'REGISTER',
   REGISTER_SUCCESS: 'REGISTER_SUCCESS',
   REGISTER_ERROR: 'REGISTER_ERROR',
+  VALID_TOKEN: 'VALID_TOKEN',
+  VALID_TOKEN_SUCCESS: 'VALID_TOKEN_SUCCESS',
+  VALID_TOKEN_ERROR: 'VALID_TOKEN_ERROR',
 };
 
 export const loginAction = () => {
@@ -51,5 +54,23 @@ export const registerErrorAction = (error) => {
   return {
     type: AUTH_TYPES.REGISTER_ERROR,
     error: error,
+  };
+};
+
+export const checkValidTokenAction = () => {
+  return {
+    type: AUTH_TYPES.VALID_TOKEN,
+  };
+};
+
+export const checkValidTokenSuccessAction = () => {
+  return {
+    type: AUTH_TYPES.VALID_TOKEN_SUCCESS,
+  };
+};
+
+export const checkValidTokenErrorAction = () => {
+  return {
+    type: AUTH_TYPES.VALID_TOKEN_ERROR,
   };
 };

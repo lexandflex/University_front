@@ -2,6 +2,7 @@ import { Route, Redirect } from 'react-router-dom';
 import React from 'react';
 import { Home } from '../../pages/Home';
 import { Sidebar } from '../components/SideBar';
+import '../../index.scss';
 
 export default function PrivateRoute({ component: Component, ...rest }) {
   const accessToken = localStorage.getItem('access_token');
@@ -12,7 +13,9 @@ export default function PrivateRoute({ component: Component, ...rest }) {
         accessToken ? (
           <>
             <Sidebar />
-            <Component {...props} />
+            <div className='component-padding'>
+              <Component {...props} />
+            </div>
           </>
         ) : (
           <Redirect to={{ pathname: '/login' }} />

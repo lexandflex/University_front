@@ -4,3 +4,28 @@ body {
   background: #34495e;
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
+.wrapper {
+  display: flex;
+}
+.component-padding {
+  padding-left: 60px;
+}
+
+.button-wrapper {
+  float: center;
+  width: 200px;
+  padding: 15px 0px;
+}
+
+.data-wrapper {
+  padding: 0px 25px;
+}
+
+.page-title {
+  width: 100%;
+  padding: 20px;
+  font-size: 35px;
+  font-weight: 600;
+  text-shadow: 1px 1px 0px #fff, 9px 8px 0px rgba(0, 0, 0, 0.15);
+}

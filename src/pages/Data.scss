@@ -1,0 +1,19 @@
+.dialog-wrapper {
+  min-width: 200px;
+}
+.dialog-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-width: 100%;
+}
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 10px;
+}
+.text-field {
+  margin-top: 15px !important;
+  width: 300px;
+}

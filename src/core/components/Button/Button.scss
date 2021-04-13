@@ -1,0 +1,24 @@
+.button {
+  color: #ffffff;
+  background: #000000;
+  padding: 5px;
+  border-radius: 24px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  //   border: 2px solid #02182f;
+  cursor: pointer;
+  span {
+    margin-right: 10px;
+  }
+  &:hover {
+    transition: 0.2s;
+    color: #000000;
+    background: #2ecc71;
+    box-shadow: -1px 0px 15px 0px #2ecc71;
+  }
+  p {
+    padding: 0;
+    margin: 0;
+  }
+}

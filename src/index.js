@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { applyMiddleware, compose, createStore } from 'redux';
 import { rootReducer } from './core/reducers/root';
 import thunk from 'redux-thunk';
+import { SnackbarProvider } from 'notistack';
 
 const store = createStore(
   rootReducer,
@@ -18,7 +19,9 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <App />
+      <SnackbarProvider maxSnack={3}>
+        <App />
+      </SnackbarProvider>
     </React.StrictMode>
   </Provider>,
   document.getElementById('root')
