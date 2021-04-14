@@ -27,18 +27,15 @@ export const getStudentsThunk = () => {
       dispatch(getStudentsAction());
       const accessToken = localStorage.getItem('access_token');
       const response = await getStudentsService(accessToken);
-      console.log({ response });
       if (response.status >= 400) {
         throw response.statusText;
       } else {
         const students = await response.json();
         dispatch(getSpecialitiesThunk());
-        console.log({ students });
         dispatch(getStudentsSuccessAction(students));
         dispatch(showNotificationAction({ message: 'Success get students', variant: 'success' }));
       }
     } catch (e) {
-      console.log(e);
       dispatch(getStudentSErrorAction(e));
       dispatch(showNotificationAction({ message: 'Get students failed', variant: 'error' }));
     }
@@ -51,17 +48,14 @@ export const createStudentThunk = (student) => {
       dispatch(createStudentAction());
       const accessToken = localStorage.getItem('access_token');
       const response = await createStudentService(accessToken, student);
-      console.log({ response });
       if (response.status >= 400) {
         throw response.statusText;
       } else {
         const student = await response.json();
-        console.log({ student });
         dispatch(createStudentSuccessAction(student));
         dispatch(showNotificationAction({ message: 'Success create student', variant: 'success' }));
       }
     } catch (e) {
-      console.log(e);
       dispatch(createStudentErrorAction(e));
       dispatch(showNotificationAction({ message: 'Create student failed', variant: 'error' }));
     }
@@ -74,7 +68,6 @@ export const deleteStudentThunk = (id) => {
       dispatch(deleteStudentAction());
       const accessToken = localStorage.getItem('access_token');
       const response = await deleteStudentService(accessToken, id);
-      console.log({ response });
       if (response.status >= 400) {
         throw response.statusText;
       } else {
@@ -82,7 +75,6 @@ export const deleteStudentThunk = (id) => {
         dispatch(showNotificationAction({ message: 'Success delete student', variant: 'success' }));
       }
     } catch (e) {
-      console.log(e);
       dispatch(deleteStudentErrorAction(e));
       dispatch(showNotificationAction({ message: 'Delete student failed', variant: 'error' }));
     }
@@ -95,17 +87,13 @@ export const editStudentThunk = (student) => {
       dispatch(editStudentAction());
       const accessToken = localStorage.getItem('access_token');
       const response = await editStudentService(accessToken, student);
-      console.log({ response });
       if (response.status >= 400) {
         throw response.statusText;
       } else {
-        // const updatedStudent = await response.json();
-        // console.log({ updatedStudent });
         dispatch(editStudentSuccessAction(student));
         dispatch(showNotificationAction({ message: 'Success edit student', variant: 'success' }));
       }
     } catch (e) {
-      console.log(e);
       dispatch(editStudentErrorAction(e));
       dispatch(showNotificationAction({ message: 'Edit student failed', variant: 'error' }));
     }

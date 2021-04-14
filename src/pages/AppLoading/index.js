@@ -7,7 +7,6 @@ import './LoadingScreen.scss';
 
 const AppLoading = (props) => {
   const { state } = props.location;
-  console.log({ props });
   const dispatch = useDispatch();
   const history = useHistory();
   useEffect(() => {

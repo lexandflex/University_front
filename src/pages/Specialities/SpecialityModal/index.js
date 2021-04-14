@@ -12,27 +12,28 @@ import {
 } from '@material-ui/core';
 import '../../Data.scss';
 
-const StudentsPlansModal = (props) => {
-  const [studentPlansData, setStudentPlansData] = useState(props.selectedStudentPlan);
+const SpecialityModal = (props) => {
+  const [specialityData, setSpecialityData] = useState(props.selectedSpeciality);
   useEffect(
     () =>
-      setStudentPlansData({
-        ...props.selectedStudentPlan,
+      setSpecialityData({
+        ...props.selectedSpeciality,
+        facultyId: props.selectedSpeciality && props.selectedSpeciality.facultyView.id,
       }),
-    [props.selectedStudentPlan]
+    [props.selectedSpeciality]
   );
   const handleChange = (key) => (event) => {
-    setStudentPlansData({ ...studentPlansData, [key]: event.target.value });
+    setSpecialityData({ ...specialityData, [key]: event.target.value });
   };
   const handleClose = () => {
-    setStudentPlansData(null);
+    setSpecialityData(null);
     props.handleClose();
   };
 
   const handleSave = () => {
-    const resultData = { ...studentPlansData, semester: Number(studentPlansData.semester) };
-    delete resultData.specialityName;
-    delete resultData.specialtyView;
+    const resultData = { ...specialityData, admissionPlan: Number(specialityData.admissionPlan) };
+    delete resultData.facultyName;
+    delete resultData.facultiView;
     props.handleItemSave(resultData);
     handleClose();
   };
@@ -50,27 +51,36 @@ const StudentsPlansModal = (props) => {
             {props.title}
           </DialogTitle>
           <TextField
-            onChange={handleChange('semester')}
+            onChange={handleChange('title')}
             className='text-field'
             size='small'
             id='outlined-basic'
-            label='Semester'
-            value={studentPlansData?.semester || ''}
+            label='Speciality Name'
+            value={specialityData?.title || ''}
+            variant='outlined'
+          />
+          <TextField
+            onChange={handleChange('admissionPlan')}
+            className='text-field'
+            size='small'
+            id='outlined-basic'
+            label='Admission plan'
+            value={specialityData?.admissionPlan || ''}
             variant='outlined'
           />
           <FormControl className='text-field' variant='outlined'>
-            <InputLabel id='demo-simple-select-outlined-label'>Speciality</InputLabel>
+            <InputLabel id='demo-simple-select-outlined-label'>Faculty</InputLabel>
             <Select
-              onChange={handleChange('specialtyId')}
+              onChange={handleChange('facultyId')}
               labelId='demo-simple-select-outlined-label'
               id='demo-simple-select-outlined'
               label='Speciality'
-              value={studentPlansData?.specialtyId || ''}
+              value={specialityData?.facultyId || ''}
             >
-              {props.specialities &&
-                props.specialities.map((speciality) => (
-                  <MenuItem key={speciality.id} value={speciality.id}>
-                    {speciality.title}
+              {props.faculties &&
+                props.faculties.map((faculty) => (
+                  <MenuItem key={faculty.id} value={faculty.id}>
+                    {faculty.title}
                   </MenuItem>
                 ))}
             </Select>
@@ -85,4 +95,4 @@ const StudentsPlansModal = (props) => {
   );
 };
 
-export default StudentsPlansModal;
+export default SpecialityModal;

@@ -1,6 +1,5 @@
 import { Route, Redirect } from 'react-router-dom';
 import React from 'react';
-import { Home } from '../../pages/Home';
 import { Sidebar } from '../components/SideBar';
 import '../../index.scss';
 

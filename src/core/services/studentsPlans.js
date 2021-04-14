@@ -11,7 +11,6 @@ export const getStudentsPlansService = async (accessToken) => {
 };
 
 export const createStudentsPlanService = async (accessToken, studentPlan) => {
-  console.log('before Post', { studentPlan });
   return fetch(`${baseStudentsPlans}/api/AcademicPlans/PostAcademicPlan`, {
     method: 'POST',
     headers: {
@@ -23,7 +22,6 @@ export const createStudentsPlanService = async (accessToken, studentPlan) => {
 };
 // /api​/AcademicPlans​/DeleteAcademicPlan?Id=${studentsPlanId}
 export const deleteStudentsPlanService = async (accessToken, studentsPlanId) => {
-  console.log('before Delete', { studentsPlanId });
   return fetch(`${baseStudentsPlans}/api/AcademicPlans/DeleteAcademicPlan?ID=${studentsPlanId}`, {
     method: 'DELETE',
     headers: {
@@ -34,7 +32,6 @@ export const deleteStudentsPlanService = async (accessToken, studentsPlanId) => 
 };
 
 export const editStudentsPlanService = async (accessToken, studentPlan) => {
-  console.log('before PUT', { studentPlan });
   return fetch(`${baseStudentsPlans}/api/AcademicPlans/PutAcademicPlan/${studentPlan.id}`, {
     method: 'PUT',
     headers: {

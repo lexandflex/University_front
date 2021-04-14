@@ -20,4 +20,7 @@ export const tableStudentsTitles = [
 export const sequencedStudentsPlansFields = ['semester', 'specialityName'];
 export const tableStudentsPlansTitles = ['Semester', 'Speciality name'];
 
+export const sequencedSpecialitiesFields = ['title', 'admissionPlan', 'facultyName'];
+export const tableSpecialitiesTitles = ['Speciality name', 'Addmission plan', 'Faculty Name'];
+
 export const defaultBdata = '2017-05-24';

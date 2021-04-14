@@ -72,40 +72,42 @@ const Students = () => {
   };
 
   return (
-    <div className='data-wrapper'>
+    <>
       <PageTitle title='Students' />
-      <StudentsModal
-        selectedStudent={selectedStudent}
-        handleClose={handleClose}
-        modalOpen={modalOpen}
-        specialities={specialities}
-        handleItemSave={saveStudent}
-        title={
-          isEdit && selectedStudent
-            ? `Edit student ${selectedStudent.surname} ${selectedStudent.firstName}`
-            : 'Add new Student'
-        }
-        saveBtnTitle={isEdit ? 'Save' : 'Create'}
-      />
-      <div className='button-wrapper'>
-        <Button name='Add student' handleClick={handleCreate}>
-          <FontAwesomeIcon className='fa' icon={faUserPlus} />
-        </Button>
+      <div className='data-wrapper'>
+        <StudentsModal
+          selectedStudent={selectedStudent}
+          handleClose={handleClose}
+          modalOpen={modalOpen}
+          specialities={specialities}
+          handleItemSave={saveStudent}
+          title={
+            isEdit && selectedStudent
+              ? `Edit student ${selectedStudent.surname} ${selectedStudent.firstName}`
+              : 'Add new Student'
+          }
+          saveBtnTitle={isEdit ? 'Save' : 'Create'}
+        />
+        <div className='button-wrapper'>
+          <Button name='Add student' handleClick={handleCreate}>
+            <FontAwesomeIcon className='fa' icon={faUserPlus} />
+          </Button>
+        </div>
+        {isLoading ? (
+          <LoadingScreen />
+        ) : (
+          studentsWithSpecialityNames && (
+            <CustomTable
+              sequencedFields={sequencedStudentsFields}
+              tableTitles={tableStudentsTitles}
+              tableData={studentsWithSpecialityNames}
+              handleDelete={handleDelete}
+              handleEdit={handleEdit}
+            />
+          )
+        )}
       </div>
-      {isLoading ? (
-        <LoadingScreen />
-      ) : (
-        studentsWithSpecialityNames && (
-          <CustomTable
-            sequencedFields={sequencedStudentsFields}
-            tableTitles={tableStudentsTitles}
-            tableData={studentsWithSpecialityNames}
-            handleDelete={handleDelete}
-            handleEdit={handleEdit}
-          />
-        )
-      )}
-    </div>
+    </>
   );
 };
 

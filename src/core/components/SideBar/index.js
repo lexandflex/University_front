@@ -1,6 +1,12 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUsers, faHome, faCalendarAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
+import {
+  faUsers,
+  faHome,
+  faCalendarAlt,
+  faSignOutAlt,
+  faUniversity,
+} from '@fortawesome/free-solid-svg-icons';
 import './SideBar.scss';
 import { useDispatch } from 'react-redux';
 import { logoutAction } from '../../actions/auth';
@@ -39,6 +45,14 @@ export const Sidebar = () => {
               <FontAwesomeIcon className='fa' icon={faCalendarAlt} />
             </span>
             <span className='navigation-name'>Students plans</span>
+          </a>
+        </li>
+        <li>
+          <a href='/specialities'>
+            <span className='navigation-icon'>
+              <FontAwesomeIcon className='fa' icon={faUniversity} />
+            </span>
+            <span className='navigation-name'>Specialities</span>
           </a>
         </li>
         <li>

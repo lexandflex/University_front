@@ -73,7 +73,7 @@ const CustomTable = ({
               <StyledTableRow key={row.id}>
                 {sequencedFields.map((field) => (
                   <StyledTableCell key={field} align='center'>
-                    {row[field] || '-'}
+                    {row[field] !== undefined ? row[field] : '-'}
                   </StyledTableCell>
                 ))}
                 <StyledTableCell align='center'>

@@ -7,7 +7,6 @@ const initialState = {
 };
 
 export const authReducer = (state = initialState, action) => {
-  console.log({ action });
   switch (action.type) {
     case AUTH_TYPES.LOGIN:
       return { ...state, isLoading: true };

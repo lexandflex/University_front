@@ -14,98 +14,103 @@ import {
 } from '../../core/thunks/studentsPlans';
 import '../../index.scss';
 import {
+  sequencedSpecialitiesFields,
   sequencedStudentsPlansFields,
+  tableSpecialitiesTitles,
   tableStudentsPlansTitles,
 } from '../../core/constants/intiail';
-import StudentsPlansModal from './StudentsPlansModal';
+import {
+  createSpecialityThunk,
+  deleteSpecialityThunk,
+  editSpecialityThunk,
+  getSpecialitiesThunk,
+} from '../../core/thunks/specialities';
+import SpecialityModal from './SpecialityModal';
 
-const StudentsPlans = () => {
+const Specialities = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedStudentPlan, setSelectedStudentPlan] = useState(null);
+  const [selectedSpeciality, setSelectedStudentPlan] = useState(null);
   const [isEdit, setIsEdit] = useState(false);
   const dispatch = useDispatch();
-  const studentsPlans = useSelector((state) => state.studentsPlansState.studentsPlans);
   const isLoading = useSelector((state) => state.studentsPlansState.isLoading);
   const specialities = useSelector((state) => state.specialitiesState.specialities);
-  useEffect(() => {
-    dispatch(getStudentsPlansThunk());
-  }, [dispatch]);
-  const getSpecialityName = useCallback(
-    (specialityId) => {
-      return (
-        specialities && specialities.find((speciality) => speciality.id === specialityId)?.title
-      );
+  const faculties = useSelector((state) => state.facultiesState.faculties);
+
+  const getFacultyName = useCallback(
+    (facultyId) => {
+      return faculties && faculties.find((faculty) => faculty.id === facultyId)?.title;
     },
-    [specialities]
+    [faculties]
   );
-  const studentsPlansWithSpecialityNames = useMemo(
+
+  const specialitiesWithFacultyNames = useMemo(
     () =>
-      studentsPlans &&
-      studentsPlans.map((studentPlan) => ({
-        ...studentPlan,
-        specialityName:
-          studentPlan.specialtyView?.title || getSpecialityName(studentPlan.specialtyId),
+      specialities &&
+      specialities.map((speciality) => ({
+        ...speciality,
+        facultyName: speciality.facultyView?.title || getFacultyName(speciality.specialtyId),
       })),
-    [getSpecialityName, studentsPlans]
+    [getFacultyName, specialities]
   );
+
+  useEffect(() => {
+    dispatch(getSpecialitiesThunk());
+  }, [dispatch]);
 
   const handleClose = () => {
     setSelectedStudentPlan(null);
     setModalOpen(false);
   };
   const handleDelete = (id) => {
-    dispatch(deleteStudentsPlanThunk(id));
+    dispatch(deleteSpecialityThunk(id));
   };
   const handleCreate = () => {
     setModalOpen(true);
     setIsEdit(false);
   };
 
-  const handleEdit = (studentPlan) => {
+  const handleEdit = (speciality) => {
     setIsEdit(true);
-    setSelectedStudentPlan(studentPlan);
+    setSelectedStudentPlan(speciality);
     setModalOpen(true);
   };
 
-  const saveStudent = (studentPlan) => {
+  const saveStudent = (speciality) => {
     setSelectedStudentPlan(null);
     isEdit
-      ? dispatch(editStudentsPlanThunk(studentPlan))
-      : dispatch(createStudentsPlanThunk(studentPlan));
+      ? dispatch(editSpecialityThunk(speciality))
+      : dispatch(createSpecialityThunk(speciality));
   };
   return (
     <>
-      <PageTitle title='Students plans' />
+      <PageTitle title='Specialities' />
       <div className='data-wrapper'>
-        <StudentsPlansModal
-          selectedStudentPlan={selectedStudentPlan}
+        <SpecialityModal
+          selectedSpeciality={selectedSpeciality}
           handleClose={handleClose}
           modalOpen={modalOpen}
-          specialities={specialities}
           handleItemSave={saveStudent}
+          faculties={faculties}
           title={
-            isEdit && selectedStudentPlan
-              ? `Edit student plan ${
-                  selectedStudentPlan.specialtyView?.title ||
-                  getSpecialityName(selectedStudentPlan.specialtyId)
-                }`
-              : 'Add new Student plan'
+            isEdit && selectedSpeciality
+              ? `Edit speciality ${selectedSpeciality?.title}`
+              : 'Add new speciality'
           }
           saveBtnTitle={isEdit ? 'Save' : 'Create'}
         />
         <div className='button-wrapper'>
-          <Button name='Add student plan' handleClick={handleCreate}>
+          <Button name='Add speciality' handleClick={handleCreate}>
             <FontAwesomeIcon className='fa' icon={faPlus} />
           </Button>
         </div>
         {isLoading ? (
           <LoadingScreen />
         ) : (
-          studentsPlansWithSpecialityNames && (
+          specialitiesWithFacultyNames && (
             <CustomTable
-              sequencedFields={sequencedStudentsPlansFields}
-              tableTitles={tableStudentsPlansTitles}
-              tableData={studentsPlansWithSpecialityNames}
+              sequencedFields={sequencedSpecialitiesFields}
+              tableTitles={tableSpecialitiesTitles}
+              tableData={specialitiesWithFacultyNames}
               handleDelete={handleDelete}
               handleEdit={handleEdit}
             />
@@ -116,4 +121,4 @@ const StudentsPlans = () => {
   );
 };
 
-export default StudentsPlans;
+export default Specialities;

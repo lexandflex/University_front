@@ -11,7 +11,6 @@ export const getStudentsService = async (accessToken) => {
 };
 
 export const createStudentService = async (accessToken, student) => {
-  console.log('before Post', { student });
   return fetch(`${baseStudentsUrl}/api/Students/PostStudent`, {
     method: 'POST',
     headers: {
@@ -23,7 +22,6 @@ export const createStudentService = async (accessToken, student) => {
 };
 
 export const deleteStudentService = async (accessToken, studentId) => {
-  console.log('before Delete', { studentId });
   return fetch(`${baseStudentsUrl}/api/Students/DeleteStudent?Id=${studentId}`, {
     method: 'DELETE',
     headers: {
@@ -34,7 +32,6 @@ export const deleteStudentService = async (accessToken, studentId) => {
 };
 
 export const editStudentService = async (accessToken, student) => {
-  console.log('before PUT', { student });
   return fetch(`${baseStudentsUrl}/api/Students/PutStudent/${student.id}`, {
     method: 'PUT',
     headers: {
